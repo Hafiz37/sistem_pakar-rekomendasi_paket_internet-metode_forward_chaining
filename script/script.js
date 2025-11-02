@@ -1,26 +1,26 @@
 const kebutuhan = {
-  'rumah': 'KK_01',
-  'bisnis': 'KK_02',
-  '1 - 3 hp': 'KK_03',
-  '4 - 6 hp': 'KK_04',
-  '7 - 10 hp': 'KK_05',
-  '11 - 20 hp': 'KK_06',
-  '21 - 30 hp': 'KK_07',
-  '1 tv': 'KK_08',
-  '2 - 3 tv': 'KK_09',
-  '1 cctv': 'KK_10',
-  '2 - 5 cctv': 'KK_11',
-  '6 - 10 cctv': 'KK_12',
-  'streaming / youtube': 'KK_13',
-  'gaming online': 'KK_14',
-  'wfh / meeting': 'KK_15',
-  'cctv 24 jam': 'KK_16',
-  'editing / upload file besar': 'KK_17',
-  'hanya untuk browsing dan sosial media': 'KK_18',
-  '< rp200 000': 'KK_19',
-  'rp200 000 – rp300 000': 'KK_20',
-  'rp300 000 – rp500 000': 'KK_21',
-  '> rp500 000': 'KK_22'
+  'rumah': 'kk_01',
+  'bisnis': 'kk_02',
+  '1 - 3 hp': 'kk_03',
+  '4 - 6 hp': 'kk_04',
+  '7 - 10 hp': 'kk_05',
+  '11 - 20 hp': 'kk_06',
+  '21 - 30 hp': 'kk_07',
+  '1 tv': 'kk_08',
+  '2 - 3 tv': 'kk_09',
+  '1 cctv': 'kk_10',
+  '2 - 5 cctv': 'kk_11',
+  '6 - 10 cctv': 'kk_12',
+  'streaming / youtube': 'kk_13',
+  'gaming online': 'kk_14',
+  'wfh / meeting': 'kk_15',
+  'cctv 24 jam': 'kk_16',
+  'editing / upload file besar': 'kk_17',
+  'hanya untuk browsing dan sosial media': 'kk_18',
+  '< rp200 000': 'kk_19',
+  'rp200 000 – rp300 000': 'kk_20',
+  'rp300 000 – rp500 000': 'kk_21',
+  '> rp500 000': 'kk_22'
 }
 
 const paket = {
@@ -63,35 +63,57 @@ const rules = [
         hasil: 'kp_03'
     }
 ]
-console.log(rules)
-console.log(rules[0])
-console.log(rules[0].kondisi)
-console.log(rules[0].kondisi[2])
-console.log(rules[0].kondisi[2].nilai)
 
 
 
-// fungsi untuk merubah input user menjadi kode
+// uabh input user menjadi kode
 function ubahInputKeKode(inputUser){
     return inputUser.map( i => kebutuhan[i.toLowerCase()])
 }
-const input = ['Rumah', '7 - 10 hp','editing / upload file besar' ]
-const recommend = ubahInputKeKode(input)
-console.log(input)
-console.log(recommend)
+
+
+// forward chaining
+function forwardChaining(fakta) {
+  for (const rule of rules) {
+    let cocok = true
+
+    for (const kondisi of rule.kondisi) {
+      const adaFakta = fakta.includes(kondisi.kode)
+
+      // jika rule tidak sesuai dengan user
+      if (adaFakta !== kondisi.nilai) {
+        cocok = false
+        break
+      }
+    }
+
+    if (cocok) {
+      console.log(`rule ${rule.kodeRule} terpenuhi`)
+      return rule.hasil
+    }
+  }
+
+  console.log('tidak ada yang cocok')
+  return null
+}
 
 
 
 
 
 
+const inputUser = ['rumah', '1 - 3 hp']
+const faktaUser = ubahInputKeKode(inputUser)
+
+console.log(inputUser)
+console.log(faktaUser)
 
 
+const hasilRule = forwardChaining(faktaUser)
 
-
-
-
-
+if (hasilRule) {
+  console.log(paket[hasilRule])
+}
 
 
 
