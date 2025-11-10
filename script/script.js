@@ -40,7 +40,7 @@ const rules = [
             { kode: 'kk_01', nilai: true },
             { kode: 'kk_03', nilai: true },
             { kode: 'kk_08', nilai: false },
-            { kode: 'kk_10', nilai: false }  
+            { kode: 'kk_10', nilai: false }
         ],
         hasil: 'kp_01'
     },
@@ -74,28 +74,31 @@ function ubahInputKeKode(inputUser){
 
 // forward chaining
 function forwardChaining(fakta) {
+  const hasilCocok = []
+
   for (const rule of rules) {
     let cocok = true
 
     for (const kondisi of rule.kondisi) {
       const adaFakta = fakta.includes(kondisi.kode)
-
-      // jika rule tidak sesuai dengan user
       if (adaFakta !== kondisi.nilai) {
         cocok = false
         break
       }
     }
 
-    if (cocok) {
-      console.log(`rule ${rule.kodeRule} terpenuhi`)
-      return rule.hasil
-    }
+    if (cocok) hasilCocok.push(rule.hasil)
   }
 
-  console.log('tidak ada yang cocok')
+  if (hasilCocok.length > 0) {
+    console.log('rule cocok:', hasilCocok)
+    return hasilCocok
+  }
+
+  console.log('tidak ada rule yang cocok')
   return null
 }
+
 
 
 
