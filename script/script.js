@@ -18,63 +18,62 @@ const kebutuhan = {
   'editing / upload file besar': 'kk_17',
   'hanya untuk browsing dan sosial media': 'kk_18',
   '< rp200 000': 'kk_19',
-  'rp200 000 – rp300 000': 'kk_20',
-  'rp300 000 – rp500 000': 'kk_21',
+  'rp200 000 - rp300 000': 'kk_20',
+  'rp300 000 - rp500 000': 'kk_21',
   '> rp500 000': 'kk_22'
 }
 
 const paket = {
-    'kp_01': 'broadband 15 mbps',
-    'kp_02': 'broadband 25 mbps',
-    'kp_03': 'broadband 35 mbps',
-    'kp_04': 'broadband 50 mbps',
-    'kp_05': 'broadband 100 mbps',
-    'kp_06': 'dadicated / survei lokasi'
+  'kp_01': 'broadband 15 mbps',
+  'kp_02': 'broadband 25 mbps',
+  'kp_03': 'broadband 35 mbps',
+  'kp_04': 'broadband 50 mbps',
+  'kp_05': 'broadband 100 mbps',
+  'kp_06': 'dadicated / survei lokasi'
 }
 
 
 const rules = [
-    {
-        kodeRule: 'r_01',
-        kondisi: [
-            { kode: 'kk_01', nilai: true },
-            { kode: 'kk_03', nilai: true },
-            { kode: 'kk_08', nilai: false },
-            { kode: 'kk_10', nilai: false }
-        ],
-        hasil: 'kp_01'
-    },
-    {
-        kodeRule: 'r_02',
-        kondisi: [
-            { kode: 'kk_01', nilai: true },
-            { kode: 'kk_04', nilai: true },
-            { kode: 'kk_08', nilai: true} 
-        ],
-        hasil: 'kp_02'
-    },
-    {
-        kodeRule: 'r_03',
-        kondisi: [
-            { kode: 'kk_01', nilai: true },
-            { kode: 'kk_05', nilai: true },
-            { kode: 'kk_09', nilai: true} 
-        ],
-        hasil: 'kp_03'
-    }
+  {
+    kodeRule: 'r_01',
+    kondisi: [
+      { kode: 'kk_01', nilai: true },
+      { kode: 'kk_03', nilai: true },
+      { kode: 'kk_08', nilai: false },
+        { kode: 'kk_10', nilai: false }
+    ],
+    hasil: 'kp_01'
+  },
+  {
+    kodeRule: 'r_02',
+    kondisi: [
+      { kode: 'kk_01', nilai: true },
+      { kode: 'kk_04', nilai: true },
+      { kode: 'kk_08', nilai: true} 
+    ],
+    hasil: 'kp_02'
+  },
+  {
+    kodeRule: 'r_03',
+    kondisi: [
+      { kode: 'kk_01', nilai: true },
+      { kode: 'kk_05', nilai: true },
+      { kode: 'kk_09', nilai: true} 
+    ],
+    hasil: 'kp_03'
+  }
 ]
 
 
 
 // uabh input user menjadi kode
 function ubahInputKeKode(inputUser){
-    return inputUser.map( i => kebutuhan[i.toLowerCase()])
+  return inputUser.map( i => kebutuhan[i.toLowerCase()])
 }
 
 
 // forward chaining
 function forwardChaining(fakta) {
-  const hasilCocok = []
 
   for (const rule of rules) {
     let cocok = true
@@ -87,12 +86,9 @@ function forwardChaining(fakta) {
       }
     }
 
-    if (cocok) hasilCocok.push(rule.hasil)
-  }
-
-  if (hasilCocok.length > 0) {
-    console.log('rule cocok:', hasilCocok)
-    return hasilCocok
+    if (cocok) {
+      return [rule.hasil]
+    }
   }
 
   console.log('tidak ada rule yang cocok')
@@ -102,28 +98,19 @@ function forwardChaining(fakta) {
 
 
 
-
-
-
-const inputUser = ['rumah', '1 - 3 hp']
+const inputText = prompt('masukkan kebutuhan:')
+const inputUser = inputText.split(',').map(x => x.trim().toLowerCase())
 const faktaUser = ubahInputKeKode(inputUser)
 
-console.log(inputUser)
-console.log(faktaUser)
-
+console.log('input User = ', inputUser)
+console.log('kode Fakta = ', faktaUser)
 
 const hasilRule = forwardChaining(faktaUser)
 
 if (hasilRule) {
-  console.log(paket[hasilRule])
+  console.log('rekomendasi paket = ')
+  hasilRule.forEach(h => console.log(paket[h]))
 }
-
-
-
-
-
-
-
 
 
 
