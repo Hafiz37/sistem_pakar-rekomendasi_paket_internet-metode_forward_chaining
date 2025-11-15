@@ -1,9 +1,9 @@
-const kebutuhan = {
+const kodeKebutuhan = {
   'rumah': 'kk_01',
   'bisnis': 'kk_02',
   '1 - 3 hp': 'kk_03',
   '4 - 6 hp': 'kk_04',
-  '7 - 10 hp': 'kk_05',
+  '7 - 10 hp': 'kk_05', 
   '11 - 20 hp': 'kk_06',
   '21 - 30 hp': 'kk_07',
   '1 tv': 'kk_08',
@@ -14,13 +14,12 @@ const kebutuhan = {
   'streaming / youtube': 'kk_13',
   'gaming online': 'kk_14',
   'wfh / meeting': 'kk_15',
-  'cctv 24 jam': 'kk_16',
-  'editing / upload file besar': 'kk_17',
-  'hanya untuk browsing dan sosial media': 'kk_18',
-  '< rp200 000': 'kk_19',
-  'rp200 000 - rp300 000': 'kk_20',
-  'rp300 000 - rp500 000': 'kk_21',
-  '> rp500 000': 'kk_22'
+  'editing / upload file besar': 'kk_16',
+  'hanya untuk browsing dan sosial media': 'kk_17',
+  '< rp200 000': 'kk_18',
+  'rp200 000 - rp300 000': 'kk_19',
+  'rp300 000 - rp500 000': 'kk_20',
+  '> rp500 000': 'kk_21'
 }
 
 const paket = {
@@ -38,9 +37,7 @@ const rules = [
     kodeRule: 'r_01',
     kondisi: [
       { kode: 'kk_01', nilai: true },
-      { kode: 'kk_03', nilai: true },
-      { kode: 'kk_08', nilai: false },
-        { kode: 'kk_10', nilai: false }
+      { kode: 'kk_03', nilai: true }
     ],
     hasil: 'kp_01'
   },
@@ -64,61 +61,71 @@ const rules = [
   }
 ]
 
+function proses() {
+
+  const inputKebutuhan = document.querySelector('input[name="kebutuhan"]:checked')?.value
+  const inputPerangkat = document.querySelector('input[name="perangkat"]:checked')?.value
+  const inputBudget = document.querySelector('input[name="budget"]:checked')?.value
+
+  const aktivitasNode = document.querySelectorAll('input[name="aktivitas"]:checked')
+  const aktivitas = [...aktivitasNode].map(a => a.value)
+  const deviceTambahanNode = document.querySelectorAll('input[name="deviceTambahan"]:checked')
+  const deviceTambahan = [...deviceTambahanNode].map(a => a.value)
+
+  const semuaInput = [inputKebutuhan, inputPerangkat, inputBudget, ...aktivitas, ...deviceTambahan].filter(Boolean)
+  
+  const fakta = semuaInput.map(i => kodeKebutuhan[i.toLowerCase()])
+
+  // console.log("Input:", semuaInput)
+  // console.log("Kode:", fakta)
+
+  // proses forward chaining
+  const hasil = forwardChaining(fakta)
+
+
+if (hasil) {
+  document.getElementById("output").innerText =
+    "Rekomendasi Paket: " + hasil
+} else {
+  document.getElementById("output").innerText =
+    "Tidak ada paket yang cocok!"
+}
+
+}
+
+
 
 
 // uabh input user menjadi kode
 function ubahInputKeKode(inputUser){
-  return inputUser.map( i => kebutuhan[i.toLowerCase()])
+  return inputUser.map( i => kodeKebutuhan[i.toLowerCase()])
 }
 
 
 // forward chaining
-function forwardChaining(fakta) {
+function forwardChaining(faktaUser) {
 
   for (const rule of rules) {
     let cocok = true
 
     for (const kondisi of rule.kondisi) {
-      const adaFakta = fakta.includes(kondisi.kode)
-      if (adaFakta !== kondisi.nilai) {
+      const ada = faktaUser.includes(kondisi.kode)
+
+      if (ada !== kondisi.nilai) {
         cocok = false
         break
       }
     }
 
     if (cocok) {
-      return [rule.hasil]
+      console.log("cocok:", paket[rule.hasil])
+      return paket[rule.hasil]
     }
   }
 
-  console.log('tidak ada rule yang cocok')
+  console.log("tidak ada rule yang cocok")
   return null
 }
-
-
-
-
-const inputText = prompt('masukkan kebutuhan:')
-const inputUser = inputText.split(',').map(x => x.trim().toLowerCase())
-const faktaUser = ubahInputKeKode(inputUser)
-
-console.log('input User = ', inputUser)
-console.log('kode Fakta = ', faktaUser)
-
-const hasilRule = forwardChaining(faktaUser)
-
-if (hasilRule) {
-  console.log('rekomendasi paket = ')
-  hasilRule.forEach(h => console.log(paket[h]))
-}
-
-
-
-
-
-
-
-
 
 
 
