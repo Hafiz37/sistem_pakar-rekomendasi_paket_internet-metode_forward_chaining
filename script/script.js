@@ -61,6 +61,37 @@ const rules = [
   }
 ]
 
+
+// forward chaining
+function forwardChaining(faktaUser) {
+
+  for (const rule of rules) {
+    let cocok = true
+
+    for (const kondisi of rule.kondisi) {
+      const ada = faktaUser.includes(kondisi.kode) 
+      if (ada !== kondisi.nilai) {
+        cocok = false 
+        break
+      }
+    }
+
+    if (cocok) {
+      // console.log( 'Rule cocok: ', rule.kodeRule) 
+
+      return {
+        kodeRule: rule.kodeRule,   
+        kodePaket: rule.hasil      
+      } 
+    }
+  }
+
+  return null 
+}
+
+
+
+
 function proses() {
 
   const inputKebutuhan = document.querySelector('input[name="kebutuhan"]:checked')?.value
@@ -76,64 +107,21 @@ function proses() {
   
   const fakta = semuaInput.map(i => kodeKebutuhan[i.toLowerCase()])
 
-  // console.log("Input:", semuaInput)
-  // console.log("Kode:", fakta)
 
-  // proses forward chaining
   const hasil = forwardChaining(fakta)
 
 
-if (hasil) {
-  document.getElementById("output").innerText =
-    "Rekomendasi Paket: " + hasil
-} else {
-  document.getElementById("output").innerText =
-    "Tidak ada paket yang cocok!"
-}
+  if (hasil) {
+    const namaPaket = paket[hasil.kodePaket] 
 
-}
-
-
-
-
-// uabh input user menjadi kode
-function ubahInputKeKode(inputUser){
-  return inputUser.map( i => kodeKebutuhan[i.toLowerCase()])
-}
-
-
-// forward chaining
-function forwardChaining(faktaUser) {
-
-  for (const rule of rules) {
-    let cocok = true
-
-    for (const kondisi of rule.kondisi) {
-      const ada = faktaUser.includes(kondisi.kode)
-
-      if (ada !== kondisi.nilai) {
-        cocok = false
-        break
+    document.getElementById( 'output').innerText =
+      `rule Ditemukan: ${hasil.kodeRule}
+      Paket Rekomendasi: ${namaPaket}` 
+      } else {
+        document.getElementById( 'output').innerText =
+          'tidak ada paket yang cocok' 
       }
-    }
-
-    if (cocok) {
-      console.log("cocok:", paket[rule.hasil])
-      return paket[rule.hasil]
-    }
-  }
-
-  console.log("tidak ada rule yang cocok")
-  return null
 }
-
-
-
-
-
-
-
-
 
 
 
