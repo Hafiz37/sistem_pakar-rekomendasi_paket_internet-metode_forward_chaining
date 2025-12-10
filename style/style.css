@@ -1,3 +1,176 @@
-body{
-  background-color: #ffffffe1;
+body {
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #333;
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: start;
+  min-height: 80%;
+  box-sizing: border-box;
+}
+
+h1 {
+  color: #fff;
+  font-size: 2.5em; 
+  font-weight: 700;
+  text-align: center;
+  /* margin-bottom: 5px; */
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+  /* background: rgba(255, 255, 255, 0.2);  */
+  padding: 10px 20px;
+  border-radius: 10px;
+  display: inline-block;
+}
+
+#form .subJudul {
+  color: #000;
+  font-size: 1.1em; 
+  font-weight: 600;
+  margin-bottom: 30px;
+  text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.6);
+  /* background: rgba(255, 255, 255, 0.1); */
+  padding: 5px 10px;
+  border-radius: 5px;
+  display: inline-block;
+}
+
+#form {
+  flex: 1;
+  max-width: 600px;
+  margin-right: 20px;
+}
+
+#formRekomendasi h3 {
+  color: #000;
+  font-weight: 700;
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8); 
+  background: rgba(255, 255, 255, 0.1); 
+  padding: 5px 10px;
+  border-radius: 5px;
+  display: inline-block; 
+}
+
+
+#formRekomendasi {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  max-width: 500px;
+  width: 100%;
+  backdrop-filter: blur(10px); 
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  justify-content: center;
+}
+
+label {
+  display: block;
+  margin: 3px 0;
+  font-weight: 400;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+label:hover {
+  color: #007bff;
+}
+
+input[type="radio"], input[type="checkbox"] {
+  margin-right: 10px;
+  transform: scale(1.2);
+  accent-color: #007bff;
+}
+
+hr {
+  border: none;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #007bff, transparent);
+  margin: 20px 0;
+}
+
+
+button {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  margin: 10px 5px 0 0;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+}
+
+button:hover {
+  background: #0056b3;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 123, 255, 0.4);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+#hasil {
+  flex: 1;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.historis {
+  margin-top: 20px;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px dashed #007bff; /* Border dashed untuk placeholder */
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  text-align: center;
+  color: #666;
+  font-style: italic;
+}
+
+#output {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+}
+
+#output h4 {
+  color: #007bff;
+  margin-bottom: 10px;
+}
+
+.paket-list {
+  list-style: none;
+  padding: 0;
+}
+
+.paket-list li {
+  background: #f8f9fa;
+  margin: 5px 0;
+  padding: 10px;
+  border-radius: 5px;
+  border-left: 5px solid #007bff;
+}
+
+#errorMsg {
+  color: #dc3545;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 10px;
 }

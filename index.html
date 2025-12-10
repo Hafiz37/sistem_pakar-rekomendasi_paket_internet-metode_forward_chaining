@@ -8,54 +8,65 @@
   <link rel="stylesheet" href="style/style.css">
 </head>
 <body>
+
+  <section id="form" >
+    <h1>Form Kebutuhan</h1>
+    <h3 class="subJudul">Masukkan kebutuhan anda untuk menghasilkan rekomendasi paket yang cocok untuk anda</h3>
+    
+    <form id="formRekomendasi">
   
-  <form id="formRekomendasi">
+      <div class="kebutuhanUtama">
+        <h3>Kebutuhan Utama</h3>
+        <label><input type="radio" name="kebutuhan" value="rumah"> Rumah</label><br>
+        <label><input type="radio" name="kebutuhan" value="bisnis"> Bisnis</label><br>
+      </div>
+  
+      <div class="jmlhPerangkat">
+        <h3>Jumlah Perangkat (HP / Device)</h3>
+        <label><input type="radio" name="perangkat" value="1 - 3 hp"> 1 - 3 HP</label><br>
+        <label><input type="radio" name="perangkat" value="4 - 6 hp"> 4 - 6 HP</label><br>
+        <label><input type="radio" name="perangkat" value="7 - 10 hp"> 7 - 10 HP</label><br>
+        <label><input type="radio" name="perangkat" value="11 - 20 hp"> 11 - 20 HP</label><br>
+        <label><input type="radio" name="perangkat" value="21 - 30 hp"> 21 - 30 HP</label><br>
+      </div>
+  
+      <div class="deviceTambahan">
+        <h3>Device tambahan (bisa pilih lebih dari 1)</h3>
+        <label><input type="checkbox" name="deviceTambahan" value="1 tv"> 1 tv </label><br>
+        <label><input type="checkbox" name="deviceTambahan" value="2 - 3 tv"> 2 - 3 tv </label><br>
+        <label><input type="checkbox" name="deviceTambahan" value="1 cctv"> 1 cctv </label><br>
+        <label><input type="checkbox" name="deviceTambahan" value="2 - 5 cctv"> 2 - 5 cctv </label><br>
+        <label><input type="checkbox" name="deviceTambahan" value="6 - 10 cctv"> 6 - 10 cctv</label><br>
+      </div>
+  
+      <div class="aktivitas">
+        <h3>Aktivitas Internet (bisa pilih lebih dari 1)</h3>
+        <label><input type="checkbox" name="aktivitas" value="streaming / youtube"> Streaming / YouTube</label><br>
+        <label><input type="checkbox" name="aktivitas" value="gaming online"> Gaming Online</label><br>
+        <label><input type="checkbox" name="aktivitas" value="wfh / meeting"> wfh / meeting</label><br>
+        <label><input type="checkbox" name="aktivitas" value="editing / upload file besar"> editing / upload file besar</label><br>
+        <label><input type="checkbox" name="aktivitas" value="hanya untuk browsing dan sosial media"> hanya untuk browsing dan sosial media</label><br>
+      </div>
+  
+      <div class="budget">
+        <h3>Budget Bulanan</h3>
+        <label><input type="radio" name="budget" value="< rp200 000"> &lt; Rp200.000</label><br>
+        <label><input type="radio" name="budget" value="rp200 000 - rp300 000"> Rp200.000 - Rp300.000</label><br>
+        <label><input type="radio" name="budget" value="rp300 000 - rp500 000"> Rp300.000 - Rp500.000</label><br>
+        <label><input type="radio" name="budget" value="> rp500 000"> &gt; Rp500.000</label><br>
+      </div>
+  
+      <button type="button" onclick="proses()">Submit</button>
+    </form>
+  </section>
 
-    <h3>Kebutuhan Utama</h3>
-    <label><input type="radio" name="kebutuhan" value="rumah"> Rumah</label><br>
-    <label><input type="radio" name="kebutuhan" value="bisnis"> Bisnis</label><br>
+  <section id="hasil" >
+    <p id="output"></p>
 
-    <hr>
+    <div class="historis">
 
-    <h3>Jumlah Perangkat (HP / Device)</h3>
-    <label><input type="radio" name="perangkat" value="1 - 3 hp"> 1 - 3 HP</label><br>
-    <label><input type="radio" name="perangkat" value="4 - 6 hp"> 4 - 6 HP</label><br>
-    <label><input type="radio" name="perangkat" value="7 - 10 hp"> 7 - 10 HP</label><br>
-    <label><input type="radio" name="perangkat" value="11 - 20 hp"> 11 - 20 HP</label><br>
-    <label><input type="radio" name="perangkat" value="21 - 30 hp"> 21 - 30 HP</label><br>
-
-    <hr>
-
-    <h3>Device tambahan (bisa pilih lebih dari 1)</h3>
-    <label><input type="checkbox" name="deviceTambahan" value="1 tv"> 1 tv </label><br>
-    <label><input type="checkbox" name="deviceTambahan" value="2 - 3 tv"> 2 - 3 tv </label><br>
-    <label><input type="checkbox" name="deviceTambahan" value="1 cctv"> 1 cctv </label><br>
-    <label><input type="checkbox" name="deviceTambahan" value="2 - 5 cctv"> 2 - 5 cctv </label><br>
-    <label><input type="checkbox" name="deviceTambahan" value="6 - 10 cctv"> 6 - 10 cctv</label><br>
-
-    <hr>
-
-    <h3>Aktivitas Internet (bisa pilih lebih dari 1)</h3>
-    <label><input type="checkbox" name="aktivitas" value="streaming / youtube"> Streaming / YouTube</label><br>
-    <label><input type="checkbox" name="aktivitas" value="gaming online"> Gaming Online</label><br>
-    <label><input type="checkbox" name="aktivitas" value="wfh / meeting"> wfh / meeting</label><br>
-    <label><input type="checkbox" name="aktivitas" value="editing / upload file besar"> editing / upload file besar</label><br>
-    <label><input type="checkbox" name="aktivitas" value="hanya untuk browsing dan sosial media"> hanya untuk browsing dan sosial media</label><br>
-
-    <hr>
-
-    <h3>Budget Bulanan</h3>
-    <label><input type="radio" name="budget" value="< rp200 000"> &lt; Rp200.000</label><br>
-    <label><input type="radio" name="budget" value="rp200 000 - rp300 000"> Rp200.000 - Rp300.000</label><br>
-    <label><input type="radio" name="budget" value="rp300 000 - rp500 000"> Rp300.000 - Rp500.000</label><br>
-    <label><input type="radio" name="budget" value="> rp500 000"> &gt; Rp500.000</label><br>
-
-    <hr>
-
-    <button type="button" onclick="proses()">Submit</button>
-  </form>
-
-  <p id="output"></p>
+    </div>
+  </section>
 
 
   <script src="script/script.js"></script>
